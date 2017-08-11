@@ -1,4 +1,4 @@
-# Laravel HashSlug
+# Laravel HashSlug (Hashids)
 
 This package is useful to hide real model ids in urls using [Hashids](https://github.com/ivanakimov/hashids.php). A hashid (slug) is deterministically generated given an application, a model class and an id. Also, given a hashid (slug), the real id can be decoded. Thus no extra field needs to be stored in the database, ids are decoded on each request.
 
@@ -154,6 +154,25 @@ class Post extends Model {
 	protected static $alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 }
 ```
+
+## Similar packages and how is this one different
+
+#### [Laravel Hashids](https://github.com/vinkla/laravel-hashids)
+
+Provides a facade, but no built-in routing. Allows multiple salts through "connections". Unnecessary overhead if you need hashids only for slugging models.
+
+#### [Laravel-Hashid](https://github.com/KissParadigm/Laravel-Hashid)
+
+Provides a facade, similar to the above one PLUS a trait similar to this package. No no built-in routing. Untested. Unnecessary overhead if you need hashids only for slugging models.
+
+#### [Hashids for Laravel 5](https://github.com/Torann/laravel-hashids)
+
+Facade only. Not as good as the first one, since it allows you to have only one salt.
+
+#### [Optimus](https://github.com/jenssegers/optimus)
+
+Uses different obfuscation method. Facade (and class) only. Nothing related to routing or model traits. It is said to be faster than hashids.
+
 
 
 
