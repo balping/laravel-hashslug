@@ -163,7 +163,7 @@ Provides a facade, but no built-in routing. Allows multiple salts through "conne
 
 #### [Laravel-Hashid](https://github.com/KissParadigm/Laravel-Hashid)
 
-Provides a facade, similar to the above one PLUS a trait similar to this package. No no built-in routing. Untested. Unnecessary overhead if you need hashids only for slugging models.
+Provides a facade, similar to the above one PLUS a trait similar to this package. No no built-in routing. No tests provided. Unnecessary overhead if you need hashids only for slugging models.
 
 #### [Hashids for Laravel 5](https://github.com/Torann/laravel-hashids)
 
@@ -173,6 +173,9 @@ Facade only. Not as good as the first one, since it allows you to have only one 
 
 Uses different obfuscation method. Facade (and class) only. Nothing related to routing or model traits. It is said to be faster than hashids.
 
+#### [Laravel FakeID](https://github.com/Propaganistas/Laravel-FakeId)
+
+Simliar to this package, but built on Optimus. Facade and trait provided, as well as a special route function. Good tests.
 
 
 
