@@ -1,0 +1,29 @@
+{
+    "name": "balping/laravel-hashslug",
+    "description": "Package providing a trait to use Hashids on a model",
+    "type": "library",
+    "require": {
+        "hashids/hashids": "^2.0",
+        "illuminate/database": "^5.4"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^3.4",
+        "phpunit/phpunit": "^6.3"
+    },
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "Balázs Dura-Kovács"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Balping\\HashSlug\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Balping\\HashSlug\\Tests\\": "tests/"
+        }
+}
+}
