@@ -1,6 +1,7 @@
 {
     "name": "balping/laravel-hashslug",
     "description": "Package providing a trait to use Hashids on a model",
+    "keywords": ["laravel", "hashids", "hashid", "slug", "hashslug"],
     "type": "library",
     "require": {
         "hashids/hashids": "^2.0",
