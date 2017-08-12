@@ -122,24 +122,24 @@ class HashSlugTest extends \Orchestra\Testbench\TestCase
 
 	/** @test */
 	public function urls_are_generated_using_slug(){
-		Route::resource('/posts', '\Balping\HashSlug\Tests\PostController', [
+		Route::resource('/posts-nobind', '\Balping\HashSlug\Tests\PostControllerNoBind', [
 			"middleware"	=> \Illuminate\Routing\Middleware\SubstituteBindings::class
 		]);
 
 		$post = Post::forceCreate(["title" => "title1"]);
 
 		$this->assertEquals(
-			'http://localhost/posts/' . $post->slug(),
-			action('\Balping\HashSlug\Tests\PostController@show', $post)
+			'http://localhost/posts-nobind/' . $post->slug(),
+			action('\Balping\HashSlug\Tests\PostControllerNoBind@show', $post)
 		);
+
+		$response = $this->get('/posts-nobind/' . $post->slug());
+
+		$this->assertEquals($post->slug(), $response->getContent());
 	}
 
 	/** @test */
 	public function route_model_binging(){
-		Route::bind('post', function ($slug) {
-			return Post::findBySlugOrFail($slug);
-		});
-
 		Route::resource('/posts', '\Balping\HashSlug\Tests\PostController', [
 			"middleware"	=> \Illuminate\Routing\Middleware\SubstituteBindings::class
 		]);
@@ -199,6 +199,13 @@ class Comment extends Model {
 
 class PostController extends Controller {
 	public function show(Post $post){
+		return $post->slug();
+	}
+}
+
+class PostControllerNoBind extends Controller {
+	public function show($slug){
+		$post = Post::findBySlugOrFail($slug);
 		return $post->slug();
 	}
 }

@@ -72,17 +72,9 @@ public function show($slug){
 }
 ```
 
-You can use [explicit model binding](https://laravel.com/docs/master/routing#explicit-binding) too.
+You can use [implicit model binding](https://laravel.com/docs/master/routing#implicit-binding) too. You don't have to do anything, it works automatically!
 
-Just add this code to `RouteServiceProvider@boot`
-
-```php
-Route::bind('post', function ($slug) {
-  return Post::findBySlugOrFail($slug);
-});
-```
-
-After that typehinted models are automatically resolved:
+Just typehint models and they are automatically resolved:
 
 ```php
 // app/Http/Controllers/PostController.php
