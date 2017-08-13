@@ -23,10 +23,24 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 namespace Balping\HashSlug;
 
 trait HasHashSlug {
+	/**
+	 * Cached hashslug
+	 * @var null|string
+	 */
 	private $slug = null;
 
+	/**
+	 * Cached HashIds instance
+	 * @var null|\Hashids\Hashids
+	 */
 	private static $hashIds = null;
 
+	/**
+	 * Returns a chached Hashids instanse
+	 * or initialises it with salt
+	 * 
+	 * @return \Hashids\Hashids
+	 */
 	private static function getHashids(){
 		if (is_null(static::$hashIds)){
 
@@ -61,11 +75,15 @@ trait HasHashSlug {
 		return static::$hashIds;
 	}
 
+	/**
+	 * Hashslug calculated from id
+	 * @return string
+	 */
 	public function slug(){
 		if (is_null($this->slug)){
 			$hashids = $this->getHashids();
 
-			$this->slug = $hashids->encode($this->id);
+			$this->slug = $hashids->encode($this->{$this->getKeyName()});
 		}
 
 		return $this->slug;
@@ -79,6 +97,13 @@ trait HasHashSlug {
 		return $this->slug();
 	}
 
+	/**
+	 * Used in explicit model binding if no callback
+	 * is specified, eg: Route::model('post', Post::class)
+	 * 
+	 * @param  string $slug
+	 * @return \Illuminate\Database\Eloquent\Model
+	 */
 	public function resolveRouteBinding($slug){
 		$id = static::decodeSlug($slug);
 		return parent::where($this->getKeyName(), $id)->first();
@@ -104,21 +129,37 @@ trait HasHashSlug {
 		}
 	}
 
-
+	/**
+	 * Decodes slug to id
+	 * @param  string $slug
+	 * @return int
+	 */
 	private static function decodeSlug($slug){
 		$hashids = static::getHashids();
 
-		$id = $hashids->decode($slug)[0];
+		$id = (int) $hashids->decode($slug)[0];
 
 		return $id;
 	}
 
+	/**
+	 * Wrapper around Model::findOrFail
+	 * 
+	 * @param  string $slug
+	 * @return \Illuminate\Database\Eloquent\Model
+	 */
 	public static function findBySlugOrFail($slug){
 		$id = static::decodeSlug($slug);
 
 		return static::findOrFail($id);
 	}
 
+	/**
+	 * Wrapper around Model::find
+	 * 
+	 * @param  string $slug
+	 * @return \Illuminate\Database\Eloquent\Model
+	 */
 	public static function findBySlug($slug){
 		$id = static::decodeSlug($slug);
 
