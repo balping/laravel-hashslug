@@ -30,6 +30,14 @@ However, although hashslug encoding depends on the app key, it cannot be exposed
 composer require balping/laravel-hashslug
 ```
 
+### Versions
+
+| Laravel | Hashslug |
+|---------|----------|
+| 5.4.\*  | 1.0.\*   |
+| 5.5.\*  | 1.1.\*   |
+
+
 ## Usage
 
 Include trait on a model that you wish to have hashid slugs to hide numeric incremental ids.
@@ -40,7 +48,7 @@ use Illuminate\Database\Eloquent\Model;
 use Balping\HashSlug\HasHashSlug;
 
 class Post extends Model {
-  use HasHashSlug;
+    use HasHashSlug;
 }
 ```
 
@@ -66,9 +74,9 @@ Then you can resolve the model by the slug.
 // app/Http/Controllers/PostController.php
 
 public function show($slug){
-  $post = Post:findBySlugOrFail($slug);
+    $post = Post:findBySlugOrFail($slug);
   
-  return view('post.show', compact('post'));
+    return view('post.show', compact('post'));
 }
 ```
 
@@ -77,10 +85,31 @@ You can use [implicit model binding](https://laravel.com/docs/master/routing#imp
 Just typehint models and they are automatically resolved:
 
 ```php
-// app/Http/Controllers/PostController.php
+// routes/web.php
+Route::resource('/posts', 'PostController');
 
+// app/Http/Controllers/PostController.php
 public function show(Post $post){
-  return view('post.show', compact('post'));
+    return view('post.show', compact('post'));
+}
+```
+
+If you need [explicit model binding](https://laravel.com/docs/master/routing#explicit-binding), that's also convenient:
+
+```php
+//app/Providers/RouteServiceProvider.php
+public function boot(){
+    parent::boot();
+
+    Route::model('article', App\Post::class);
+}
+
+// routes/web.php
+Route::resource('/articles', 'PostController');
+
+// app/Http/Controllers/PostController.php
+public function show(Post $post){
+    return view('post.show', compact('post'));
 }
 ```
 
