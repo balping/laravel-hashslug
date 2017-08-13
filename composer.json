@@ -5,11 +5,11 @@
     "type": "library",
     "require": {
         "hashids/hashids": "^2.0",
-        "illuminate/database": "~5.4.0",
-        "illuminate/routing": "~5.4.0"
+        "illuminate/database": "5.5.*",
+        "illuminate/routing": "5.5.*"
     },
     "require-dev": {
-        "orchestra/testbench": "^3.4",
+        "orchestra/testbench": "3.5.x@dev",
         "phpunit/phpunit": "^6.3"
     },
     "license": "GPL-3.0",
@@ -27,5 +27,7 @@
         "psr-4": {
             "Balping\\HashSlug\\Tests\\": "tests/"
         }
-}
+	},
+	"minimum-stability": "dev",
+	"prefer-stable": true
 }

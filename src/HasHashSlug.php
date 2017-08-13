@@ -79,17 +79,22 @@ trait HasHashSlug {
 		return $this->slug();
 	}
 
+	public function resolveRouteBinding($slug){
+		$id = static::decodeSlug($slug);
+		return parent::where($this->getKeyName(), $id)->first();
+	}
+
 	/**
 	 * Terrible hack to make automatic implicit route model binding possible
 	 *
 	 * @see \Illuminate\Routing\RouteBinding@forModel
 	 * 
-     * @param  string|array|\Closure  $column
-     * @param  string  $operator
-     * @param  mixed   $value
-     * @param  string  $boolean
-     * @return \Illuminate\Database\Query\Builder
-     */
+	 * @param  string|array|\Closure  $column
+	 * @param  string  $operator
+	 * @param  mixed   $value
+	 * @param  string  $boolean
+	 * @return \Illuminate\Database\Query\Builder
+	 */
 	public function where(... $arguments){
 		if($arguments[0] == 'hashslug'){
 			$id = static::decodeSlug($arguments[1]);
@@ -98,6 +103,7 @@ trait HasHashSlug {
 			return parent::where(... $arguments);
 		}
 	}
+
 
 	private static function decodeSlug($slug){
 		$hashids = static::getHashids();

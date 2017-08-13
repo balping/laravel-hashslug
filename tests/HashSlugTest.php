@@ -28,9 +28,11 @@ use Balping\HashSlug\HasHashSlug;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Controller;
 use Illuminate\Database\Capsule\Manager as DB;
+use Illuminate\Foundation\Testing\Concerns\InteractsWithExceptionHandling;
 
 class HashSlugTest extends \Orchestra\Testbench\TestCase
 {
+	use InteractsWithExceptionHandling;
 
 	public function setUp() {
 		parent::setUp();
@@ -139,7 +141,24 @@ class HashSlugTest extends \Orchestra\Testbench\TestCase
 	}
 
 	/** @test */
-	public function route_model_binging(){
+	public function implicit_route_model_binging(){
+		Route::resource('/posts', '\Balping\HashSlug\Tests\PostController', [
+			"middleware"	=> \Illuminate\Routing\Middleware\SubstituteBindings::class
+		]);
+
+		$post = Post::forceCreate(["title" => "title1"]);
+
+		$this->app['config']->set('app.debug', true);
+
+		$response = $this->get('/posts/' . $post->slug());
+
+		$this->assertEquals($post->slug(), $response->getContent());
+	}
+
+	/** @test */
+	public function explicit_route_model_binging(){
+		Route::model('post', Post::class);
+
 		Route::resource('/posts', '\Balping\HashSlug\Tests\PostController', [
 			"middleware"	=> \Illuminate\Routing\Middleware\SubstituteBindings::class
 		]);
