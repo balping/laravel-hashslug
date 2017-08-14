@@ -112,7 +112,7 @@ trait HasHashSlug {
 	/**
 	 * Terrible hack to make automatic implicit route model binding possible
 	 *
-	 * @see \Illuminate\Routing\RouteBinding@forModel
+	 * @see \Illuminate\Routing\ImplicitRouteBinding::resolveForRoute
 	 * 
 	 * @param  string|array|\Closure  $column
 	 * @param  string  $operator
