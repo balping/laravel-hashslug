@@ -22,7 +22,7 @@ It is important to note that hashids are __not random, nor unpredictable__. Do n
 
 > Do you have a question or comment that involves "security" and "hashids" in the same sentence? Don't use Hashids.
 
-However, although hashslug encoding depends on the app key, it cannot be exposed by an attacker, since it's [sha256 hashed](https://github.com/balping/laravel-hashslug/blob/master/src/HasHashSlug.php#L56) before passing it to Hashids. Your app key is safe.
+However, although hashslug encoding depends on the app key, it cannot be exposed by an attacker, since it's [sha256 hashed](https://github.com/balping/laravel-hashslug/blob/bc66a9c5f635ef7d6d4b5e904529c3c26194ce99/src/HasHashSlug.php#L70) before passing it to Hashids. Your app key is safe.
 
 ## Installation
 
