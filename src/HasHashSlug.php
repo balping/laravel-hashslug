@@ -58,7 +58,7 @@ trait HasHashSlug {
 			if(isset(static::$alphabet)) {
 				$alphabet = static::$alphabet;
 			}else{
-				$alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+				$alphabet = 'bcdfghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZ1234567890';
 			}
 
 			$salt = config('hashslug.appsalt', env('APP_KEY')) . $modelSalt;
