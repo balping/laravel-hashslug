@@ -5,11 +5,11 @@
     "type": "library",
     "require": {
         "hashids/hashids": "^2.0",
-        "illuminate/database": "5.5.*",
-        "illuminate/routing": "5.5.*"
+        "illuminate/database": "~5.4.0",
+        "illuminate/routing": "~5.4.0"
     },
     "require-dev": {
-        "orchestra/testbench": "3.5.x@dev",
+        "orchestra/testbench": "^3.4",
         "phpunit/phpunit": "^6.3"
     },
     "license": "GPL-3.0",

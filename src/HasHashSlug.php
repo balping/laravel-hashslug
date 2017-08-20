@@ -98,16 +98,23 @@ trait HasHashSlug {
 	}
 
 	/**
-	 * Used in implicit model binding AND
-	 * used in explicit model binding if no callback
-	 * is specified, eg: Route::model('post', Post::class)
+	 * Terrible hack to make automatic implicit route model binding possible
+	 *
+	 * @see \Illuminate\Routing\RouteBinding@forModel
 	 * 
-	 * @param  string $slug
-	 * @return \Illuminate\Database\Eloquent\Model
-	 */
-	public function resolveRouteBinding($slug){
-		$id = static::decodeSlug($slug);
-		return parent::where($this->getKeyName(), $id)->first();
+     * @param  string|array|\Closure  $column
+     * @param  string  $operator
+     * @param  mixed   $value
+     * @param  string  $boolean
+     * @return \Illuminate\Database\Query\Builder
+     */
+	public function where(... $arguments){
+		if($arguments[0] == 'hashslug'){
+			$id = static::decodeSlug($arguments[1]);
+			return parent::where($this->getKeyName(), $id);
+		}else{
+			return parent::where(... $arguments);
+		}
 	}
 
 	/**

@@ -32,8 +32,6 @@ use Illuminate\Foundation\Testing\Concerns\InteractsWithExceptionHandling;
 
 class HashSlugTest extends \Orchestra\Testbench\TestCase
 {
-	use InteractsWithExceptionHandling;
-
 	public function setUp() {
 		parent::setUp();
 		$this->configureDatabase();
