@@ -113,14 +113,18 @@ trait HasHashSlug {
 	/**
 	 * Decodes slug to id
 	 * @param  string $slug
-	 * @return int
+	 * @return int|null
 	 */
 	private static function decodeSlug($slug){
 		$hashids = static::getHashids();
 
-		$id = (int) $hashids->decode($slug)[0];
+		$decoded = $hashids->decode($slug);
 
-		return $id;
+		if(! isset($decoded[0])){
+			return null;
+		}
+
+		return (int) $decoded[0];
 	}
 
 	/**
@@ -139,7 +143,7 @@ trait HasHashSlug {
 	 * Wrapper around Model::find
 	 * 
 	 * @param  string $slug
-	 * @return \Illuminate\Database\Eloquent\Model
+	 * @return \Illuminate\Database\Eloquent\Model|null
 	 */
 	public static function findBySlug($slug){
 		$id = static::decodeSlug($slug);

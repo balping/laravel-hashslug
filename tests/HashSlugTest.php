@@ -90,6 +90,17 @@ class HashSlugTest extends \Orchestra\Testbench\TestCase
 	}
 
 	/** @test */
+	public function find_byinvalid_slug_returns_null(){
+		$post = Post::forceCreate(["title" => "title1"]);
+
+		$slug = 'XX' . $post->slug();
+
+		$foundPost = Post::findBySlug($slug);
+
+		$this->assertNull($foundPost);
+	}
+
+	/** @test */
 	public function slugs_are_different_for_same_id_but_different_model(){
 		$post = Post::forceCreate(["title" => "title1"]);
 
