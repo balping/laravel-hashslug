@@ -44,7 +44,7 @@ trait HasHashSlug {
 	private static function getHashids(){
 		if (is_null(static::$hashIds)){
 
-			$minSlugLength = 5;
+			$minSlugLength = config('hashslug.minSlugLength', 5);
 			if(isset(static::$minSlugLength)) {
 				$minSlugLength = static::$minSlugLength;
 			}
@@ -58,7 +58,7 @@ trait HasHashSlug {
 			if(isset(static::$alphabet)) {
 				$alphabet = static::$alphabet;
 			}else{
-				$alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+				$alphabet = config('hashslug.alphabet', 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890');
 			}
 
 			$salt = config('hashslug.appsalt', env('APP_KEY')) . $modelSalt;

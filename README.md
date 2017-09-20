@@ -115,18 +115,6 @@ public function show(Post $post){
 
 ## Customisation
 
-### Padding
-
-Change the minimum length of a slug (default: 5)
-
-```php
-class Post extends Model {
-	use HasHashSlug;
-
-	protected static $minSlugLength = 10;
-}
-```
-
 ### Salts
 
 The uniqueness of hashslug series per model and app installation depends on having unique salts.
@@ -141,7 +129,7 @@ To change the 'application salt', create file `config/hashslug.php` then add the
 <?php
 
 return [
-	'appsalt' => 'your-application-salt'
+    'appsalt' => 'your-application-salt'
 ];
 ```
 
@@ -153,16 +141,33 @@ To use a custom model salt instead of the classname:
 
 ```php
 class Post extends Model {
-	use HasHashSlug;
+    use HasHashSlug;
 
-	protected static $modelSalt = "posts";
+    protected static $modelSalt = "posts";
 }
 ```
 
 This might be a good idea to do, if you have several extended classes of the same model and you need hashslugs to be consistent.
 
+### Padding
 
-#### Alphabet
+Change the minimum length of a slug (default: 5)
+
+```php
+class Post extends Model {
+    use HasHashSlug;
+
+    protected static $minSlugLength = 10;
+}
+```
+
+You can set the minimum length of a slug globally too, by adding the following line to `config/hashslug.php`:
+
+```php
+    'minSlugLength' => 10
+```
+
+### Alphabet
 
 The default alphabet is `abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890`
 
@@ -170,10 +175,16 @@ This can be changed:
 
 ```php
 class Post extends Model {
-	use HasHashSlug;
+    use HasHashSlug;
 
-	protected static $alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    protected static $alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 }
+```
+
+You can set the alphabet globally too, by adding the following line to `config/hashslug.php`:
+
+```php
+    'alphabet' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 ```
 
 ## Similar packages and how is this one different
