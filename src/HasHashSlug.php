@@ -115,7 +115,7 @@ trait HasHashSlug {
 	 * @param  string $slug
 	 * @return int|null
 	 */
-	private static function decodeSlug($slug){
+	public static function decodeSlug($slug){
 		$hashids = static::getHashids();
 
 		$decoded = $hashids->decode($slug);
