@@ -61,7 +61,7 @@ trait HasHashSlug {
 				$alphabet = config('hashslug.alphabet', 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890');
 			}
 
-			$salt = config('hashslug.appsalt', env('APP_KEY')) . $modelSalt;
+			$salt = config('hashslug.appsalt', config('app.key')) . $modelSalt;
 			
 			// This is impotant!
 			// Don't use a weak hash, otherwise
