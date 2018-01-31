@@ -12,7 +12,7 @@
         "orchestra/testbench": "^3.4",
         "phpunit/phpunit": "^6.3"
     },
-    "license": "GPL-3.0",
+    "license": "GPL-3.0-only",
     "authors": [
         {
             "name": "Balázs Dura-Kovács"
