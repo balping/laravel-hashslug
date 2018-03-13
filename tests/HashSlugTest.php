@@ -3,7 +3,7 @@
 /*
 
 Laravel HashSlug: Package providing a trait to use Hashids on a model
-Copyright (C) 2017  Balázs Dura-Kovács
+Copyright (C) 2017-2018  Balázs Dura-Kovács
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
