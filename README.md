@@ -34,8 +34,12 @@ composer require balping/laravel-hashslug
 
 | Laravel | Hashslug |
 |---------|----------|
-| 5.4.\*  | 1.0.\*   |
-| 5.5.\*  | 1.1.\*   |
+| 5.4.\*  | 2.0.\*   |
+| 5.5.\*  | 2.1.\*   |
+| 5.6.\*  | 2.1.\*   |
+
+
+> **Note:** This package requires either the [BC Math](https://secure.php.net/manual/en/book.bc.php) or [GMP](https://secure.php.net/manual/en/book.gmp.php) extension in order to work.
 
 
 ## Usage
