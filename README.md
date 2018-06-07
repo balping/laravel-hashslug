@@ -1,3 +1,9 @@
+## Moved to GitLab
+
+**Warning**: This project has been moved to GitLab: https://gitlab.com/balping/laravel-hashslug
+
+----
+
 # Laravel HashSlug (Hashids)
 
 This package is useful to hide real model ids in urls using [Hashids](https://github.com/ivanakimov/hashids.php). A hashid (slug) is deterministically generated given an application, a model class and an id. Also, given a hashid (slug), the real id can be decoded. Thus no extra field needs to be stored in the database, ids are decoded on each request.
